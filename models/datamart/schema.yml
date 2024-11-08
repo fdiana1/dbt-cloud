@@ -25,7 +25,7 @@ models:
       - name: payment_method
         description: "Name of the payment method."
 
-  - name: dim_fare_class
+  - name: dim_fare_class_category
     description: "Dimension table for fare classes."
     columns:
       - name: fare_class_id
@@ -33,10 +33,10 @@ models:
       - name: fare_class_category
         description: "Category of the fare class."
 
-  - name: fact_transit_ridership
+  - name: fact_subway_transit_ridership
     description: "Fact table for transit ridership data."
     columns:
-      - name: ridership_id
+      - name: subway_ridership_id
         description: "Unique key generated using MD5 for the ridership entry."
       - name: station_complex_id
         description: "Station complex ID for the ridership event."

@@ -1,0 +1,48 @@
+version: 2
+
+models:
+  - name: ridership_pattern_analysis
+    description: "Identifies hourly ridership trends by subway station."
+    columns:
+      - name: station_complex_id
+        description: "Unique identifier for each subway station complex."
+      - name: station_complex
+        description: "Name of the subway station complex."
+      - name: hour_of_day
+        description: "Hour of the day (0-23) when ridership is recorded."
+      - name: total_ridership
+        description: "Total ridership for the station at the specified hour."
+
+  - name: peak_hour_analysis
+    description: "Analyzes peak ridership hours for each station by day of the week."
+    columns:
+      - name: station_complex_id
+        description: "Unique identifier for each subway station complex."
+      - name: station_complex
+        description: "Name of the subway station complex."
+      - name: day_of_week
+        description: "Day of the week (1=Sunday, 7=Saturday) when ridership is recorded."
+      - name: hour_of_day
+        description: "Hour of the day (0-23) when ridership is recorded."
+      - name: total_ridership
+        description: "Total ridership for the station at the specified hour and day."
+
+  - name: fare_type_analysis
+    description: "Evaluates the impact of fare types on ridership levels."
+    columns:
+      - name: fare_class_id
+        description: "Unique identifier for each fare type."
+      - name: fare_class_category
+        description: "Category of the fare (e.g., Full Fare, Students)."
+      - name: total_ridership
+        description: "Total ridership for each fare category."
+
+  - name: station_performance_evaluation
+    description: "Assesses the performance of each subway station based on ridership numbers."
+    columns:
+      - name: station_complex_id
+        description: "Unique identifier for each subway station complex."
+      - name: station_complex
+        description: "Name of the subway station complex."
+      - name: total_ridership
+        description: "Total ridership for the station complex."
