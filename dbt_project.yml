@@ -1,46 +1,50 @@
-name: "my_new_project" # Replace with your actual project name
+name: "my_new_project"  # Replace with your actual project name
 version: "1.0.0"
 config-version: 2
 
-profile: "my_new_project" # Should match the profile name in profiles.yml
+profile: "my_new_project"  # Should match the profile name in profiles.yml
 
 # Define where dbt should look for models and configurations.
-# Set to the top-level models folder, not specific subfolders.
 source-paths: ["models"]
-analysis-paths: ["analysis"]
-target-path: "target"
-clean-targets: ["target", "dbt_modules"]
+analysis-paths: ["analysis"]  # Location for analysis models, if you have any
+target-path: "target"  # Location for compiled and run results
+clean-targets: ["target", "dbt_modules"]  # Folders to clean during dbt run
 
 # Define the default materialization and configurations for each folder in the project
 models:
-  my_new_project: # Replace with your project name
+  my_new_project:  # Replace with your project name
     # Set default configs for the entire project
-    +materialized: view
-    +schema: "analytics"
+    +materialized: view  # Default materialization for all models in the project
+    +schema: "analytics"  # Schema where models will be stored (e.g., analytics or datamart)
 
     staging:
-      +schema: "staging" # Separate schema for staging
-      +materialized: view # Typically use views for staging models
+      +schema: "staging"  # Separate schema for staging models
+      +materialized: view  # Use views for staging models to reduce data storage cost
 
     datamart:
-      +schema: "datamart" # Separate schema for datamart models
-      +materialized: table # Materialize dim and fact tables as tables
-      
+      +schema: "datamart"  # Separate schema for datamart models (e.g., fact and dimension tables)
+      +materialized: table  # Materialize dim and fact tables as tables for better performance
+
+  # For analysis models, you can assign them to be materialized as tables as well
+  analysis:
+    +schema: "analytics"  # Assign analysis models to the analytics schema
+    +materialized: table  # Materialize analysis models as tables (for storing results)
+
 # Define tests and configurations for all seed files (if any) in the project
 seeds:
   my_new_project:
-    +schema: "raw_data"
-    +quote_columns: true
+    +schema: "raw_data"  # Location for raw data seeds, typically before transformation
+    +quote_columns: true  # Quotes column names in seed files to avoid conflicts with SQL keywords
 
 # Add macros directory if any custom macros are used in this project
-macro-paths: ["macros"]
+macro-paths: ["macros"]  # Location for reusable dbt macros
 
 # Set up variables that might be used in the project
 vars:
-  date_cutoff: "2023-01-01" # Example of a variable that could be used in models for filtering
-  environment: "dev" # Can be used to dynamically adjust configs based on environment
+  date_cutoff: "2023-01-01"  # Example of a variable to filter models based on a date
+  environment: "dev"  # Environment variable (can be used for different configurations in different environments)
 
 # Configurations for snapshots (if used)
 snapshots:
   my_new_project:
-    +schema: "snapshots"
+    +schema: "snapshots"  # Schema for snapshot tables to track historical data
