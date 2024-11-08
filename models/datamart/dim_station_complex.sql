@@ -1,5 +1,5 @@
 SELECT
-    station_complex_id,
+    MD5(CONCAT(CAST(station_complex_id AS STRING), georeference)) AS station_complex_id,
     station_complex,
     borough,
     latitude,
