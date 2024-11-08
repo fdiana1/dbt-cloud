@@ -1,5 +1,5 @@
 WITH base AS (
-    SELECT
+    SELECT distinct
         transit_timestamp,
         transit_mode,
         station_complex_id,

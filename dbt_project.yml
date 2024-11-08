@@ -5,8 +5,8 @@ config-version: 2
 profile: "my_new_project"  # Should match the profile name in profiles.yml
 
 # Define where dbt should look for models and configurations.
-source-paths: ["models"]
-analysis-paths: ["analysis"]  # Location for analysis models, if you have any
+model-paths: ["models"]  # Updated to model-paths as per the deprecation warning
+analysis-paths: ["analysis"]  # Location for analysis models
 target-path: "target"  # Location for compiled and run results
 clean-targets: ["target", "dbt_modules"]  # Folders to clean during dbt run
 
@@ -15,7 +15,7 @@ models:
   my_new_project:  # Replace with your project name
     # Set default configs for the entire project
     +materialized: view  # Default materialization for all models in the project
-    +schema: "analytics"  # Schema where models will be stored (e.g., analytics or datamart)
+    +schema: "analysis"  # Changed schema to 'analysis' for all models
 
     staging:
       +schema: "staging"  # Separate schema for staging models
@@ -24,11 +24,6 @@ models:
     datamart:
       +schema: "datamart"  # Separate schema for datamart models (e.g., fact and dimension tables)
       +materialized: table  # Materialize dim and fact tables as tables for better performance
-
-  # For analysis models, you can assign them to be materialized as tables as well
-  analysis:
-    +schema: "analysis"  # Assign analysis models to the analytics schema
-    +materialized: table  # Materialize analysis models as tables (for storing results)
 
 # Define tests and configurations for all seed files (if any) in the project
 seeds:
