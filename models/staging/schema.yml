@@ -1,0 +1,19 @@
+version: 2
+
+sources:
+  - name: raw_data
+    database: cis-4400-mta-riderships # Replace with your BigQuery database name
+    schema: raw_data
+    tables:
+      - name: tb_subway_ridership
+        description: "Raw data for subway ridership"
+
+models:
+  - name: stg_tb_subway_ridership
+    description: "Staging model for subway ridership data"
+    columns:
+      - name: ridership_id
+        description: "Unique ID for ridership records"
+      - name: station_complex_id
+        description: "Original station complex identifier"
+      # Add other column descriptions as needed

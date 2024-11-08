@@ -1,0 +1,54 @@
+version: 2
+
+models:
+  - name: dim_station_complex
+    description: "Dimension table for subway station complexes."
+    columns:
+      - name: station_complex_id
+        description: "Original station complex ID from the source data."
+      - name: station_complex_key
+        description: "Unique key generated using MD5 for the station complex."
+      - name: station_complex
+        description: "Name of the subway station complex."
+      - name: borough
+        description: "Borough where the station is located."
+      - name: latitude
+        description: "Latitude of the station complex."
+      - name: longitude
+        description: "Longitude of the station complex."
+
+  - name: dim_payment_method
+    description: "Dimension table for payment methods."
+    columns:
+      - name: payment_method_id
+        description: "Unique key generated using MD5 for the payment method."
+      - name: payment_method
+        description: "Name of the payment method."
+
+  - name: dim_fare_class
+    description: "Dimension table for fare classes."
+    columns:
+      - name: fare_class_id
+        description: "Unique key generated using MD5 for the fare class."
+      - name: fare_class_category
+        description: "Category of the fare class."
+
+  - name: fact_transit_ridership
+    description: "Fact table for transit ridership data."
+    columns:
+      - name: ridership_id
+        description: "Unique key generated using MD5 for the ridership entry."
+      - name: station_complex_id
+        description: "Station complex ID for the ridership event."
+      - name: payment_method_id
+        description: "ID of the payment method used."
+      - name: fare_class_id
+        description: "ID of the fare class category."
+      - name: transit_date
+        description: "Date of the transit event."
+      - name: transit_time
+        description: "Time of the transit event."
+      - name: total_ridership
+        description: "Total ridership count."
+      - name: total_transfers
+        description: "Total transfer count."
