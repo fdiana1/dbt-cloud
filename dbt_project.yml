@@ -27,7 +27,7 @@ models:
 
   # For analysis models, you can assign them to be materialized as tables as well
   analysis:
-    +schema: "analytics"  # Assign analysis models to the analytics schema
+    +schema: "analysis"  # Assign analysis models to the analytics schema
     +materialized: table  # Materialize analysis models as tables (for storing results)
 
 # Define tests and configurations for all seed files (if any) in the project
