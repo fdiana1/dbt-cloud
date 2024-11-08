@@ -7,4 +7,4 @@ SELECT
     transit_mode,
     ridership,
     transfers
-FROM {{ ref('stg_transit_data') }};
+FROM {{ ref('stg_tb_subway_ridership') }}

@@ -1,42 +1,46 @@
-
-# Name your project! Project names should contain only lowercase characters
-# and underscores. A good package name should reflect your organization's
-# name or the intended use of these models
-name: 'my_new_project'
-version: '1.0.0'
+name: "my_new_project" # Replace with your actual project name
+version: "1.0.0"
 config-version: 2
 
-# This setting configures which "profile" dbt uses for this project.
-profile: 'default'
+profile: "my_new_project" # Should match the profile name in profiles.yml
 
-# These configurations specify where dbt should look for different types of files.
-# The `model-paths` config, for example, states that models in this project can be
-# found in the "models/" directory. You probably won't need to change these!
-model-paths: ["models"]
-analysis-paths: ["analyses"]
-test-paths: ["tests"]
-seed-paths: ["seeds"]
-macro-paths: ["macros"]
-snapshot-paths: ["snapshots"]
+# Define where dbt should look for models and configurations.
+# Set to the top-level models folder, not specific subfolders.
+source-paths: ["models"]
+analysis-paths: ["analysis"]
+target-path: "target"
+clean-targets: ["target", "dbt_modules"]
 
-target-path: "target"  # directory which will store compiled SQL files
-clean-targets:         # directories to be removed by `dbt clean`
-  - "target"
-  - "dbt_packages"
-
-
-# Configuring models
-# Full documentation: https://docs.getdbt.com/docs/configuring-models
-
-# In dbt, the default materialization for a model is a view. This means, when you run 
-# dbt run or dbt build, all of your models will be built as a view in your data platform. 
-# The configuration below will override this setting for models in the example folder to 
-# instead be materialized as tables. Any models you add to the root of the models folder will 
-# continue to be built as views. These settings can be overridden in the individual model files
-# using the `{{ config(...) }}` macro.
-
+# Define the default materialization and configurations for each folder in the project
 models:
+  my_new_project: # Replace with your project name
+    # Set default configs for the entire project
+    +materialized: view
+    +schema: "analytics"
+
+    staging:
+      +schema: "staging" # Separate schema for staging
+      +materialized: view # Typically use views for staging models
+
+    datamart:
+      +schema: "datamart" # Separate schema for datamart models
+      +materialized: table # Materialize dim and fact tables as tables
+      
+# Define tests and configurations for all seed files (if any) in the project
+seeds:
   my_new_project:
-    # Applies to all files under models/example/
-    example:
-      +materialized: table
+    +schema: "raw_data"
+    +quote_columns: true
+
+# Add macros directory if any custom macros are used in this project
+macro-paths: ["macros"]
+
+# Set up variables that might be used in the project
+vars:
+  date_cutoff: "2023-01-01" # Example of a variable that could be used in models for filtering
+  environment: "dev" # Can be used to dynamically adjust configs based on environment
+
+# Configurations for snapshots (if used)
+snapshots:
+  my_new_project:
+    +schema: "snapshots"
