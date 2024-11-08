@@ -25,7 +25,7 @@ models:
       - name: payment_method
         description: "Name of the payment method."
 
-  - name: dim_fare_class
+  - name: dim_fare_class_category
     description: "Dimension table for fare classes."
     columns:
       - name: fare_class_id
